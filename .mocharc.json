@@ -1,0 +1,12 @@
+
+{
+  "extension": ["ts"],
+  "spec": "test/**/*.spec.ts",
+  "require": [
+    "ts-node/register",
+    "source-map-support/register"
+  ],
+  "full-trace": true,
+  "exit": true,
+  "timeout": 5000
+}

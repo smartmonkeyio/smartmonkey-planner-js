@@ -1,0 +1,36 @@
+{
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true,
+    "eslint.format.enable": true,
+    //"source.organizeImports": true,
+  },
+  "files.watcherExclude": {
+    "**/.git/objects/**": true,
+    "**/node_modules/**": true
+  },
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    // "build": true,
+    // "coverage": true,
+    // "node_modules": true,
+    ".nyc_output": true
+  },
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "cSpell.ignoreWords": [
+    "granier",
+    "invalidtoken",
+    "mercadona",
+    "paco"
+  ],
+  "mochaExplorer.files": "src/**/*.spec.ts",
+  "mochaExplorer.require": "ts-node/register",
+  "python.linting.flake8Enabled": true,
+  "python.linting.enabled": true,
+  "mochaExplorer.files": "src/**/*.spec.ts",
+  "mochaExplorer.require": "ts-node/register"
+}
