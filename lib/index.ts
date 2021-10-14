@@ -1,6 +1,9 @@
-import { IHighwayOptions } from './common/interfaces/common';
-import { Highway } from './src/Highway';
+import { IPlannerOptions } from "./common/interfaces/common";
+import { Planner } from "./src/Planner";
 
-export function createHighway(apiKey: string, options?: IHighwayOptions): Highway {
-  return new Highway(apiKey, options || {});
+export function createPlanner(
+  apiKey: string,
+  options?: IPlannerOptions
+): Planner {
+  return new Planner(apiKey, options || {});
 }

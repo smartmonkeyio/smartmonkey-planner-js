@@ -1,4 +1,4 @@
-export class HighwayError extends Error {
+export class PlannerError extends Error {
   messageId: string;
   httpsStatus: number;
 

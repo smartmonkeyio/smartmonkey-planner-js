@@ -1,4 +1,4 @@
-export interface IHighwayOptions {
+export interface IPlannerOptions {
   bearer?: string;
   apiEndpoint?: string;
   queryParams?: {

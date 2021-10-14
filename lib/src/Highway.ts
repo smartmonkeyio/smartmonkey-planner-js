@@ -1,7 +1,7 @@
 import axios from "axios";
-import { API_VERSION, HIGHWAY_ENDPOINT } from "../common/constants";
-import { HighwayError } from "../common/errors";
-import { IHighwayOptions } from "../common/interfaces/common";
+import { API_VERSION, PLANNER_ENDPOINT } from "../common/constants";
+import { PlannerError } from "../common/errors";
+import { IPlannerOptions } from "../common/interfaces/common";
 import { Client } from "./Client";
 import { Plan } from "./Plan";
 import { Driver } from "./Driver";
@@ -9,7 +9,7 @@ import { Stop } from "./Stop";
 import { Vehicle } from "./Vehicle";
 import { Webhook } from "./Webhook";
 
-export class Highway {
+export class Planner {
   private _token?: string;
   private _apiKey: string;
   private apiEndpoint: string;
@@ -22,7 +22,7 @@ export class Highway {
   stop: Stop;
   vehicle: Vehicle;
 
-  constructor(apiKey: string, options: IHighwayOptions) {
+  constructor(apiKey: string, options: IPlannerOptions) {
     this._token = options.bearer;
     this._apiKey = apiKey;
     this.client = new Client(this);
@@ -31,24 +31,35 @@ export class Highway {
     this.driver = new Driver(this);
     this.stop = new Stop(this);
     this.vehicle = new Vehicle(this);
-    this.apiEndpoint = options.apiEndpoint || HIGHWAY_ENDPOINT;
+    this.apiEndpoint = options.apiEndpoint || PLANNER_ENDPOINT;
     this.queryParams = options.queryParams;
   }
 
-  private _request = async (method: (url: string, data: any, headers?: any) => Promise<any>, url: string, data?: any, headers?: any) => {
+  private _request = async (
+    method: (url: string, data: any, headers?: any) => Promise<any>,
+    url: string,
+    data?: any,
+    headers?: any
+  ) => {
     try {
       if (data) {
         return (
-          await method(`${this.apiEndpoint}/${API_VERSION}/${url}`, data || {}, {
-            params: {
-              ...(this._apiKey ? { private_key: this._apiKey } : {}),
-              ...(this.queryParams ? this.queryParams : {}),
-            },
-            headers: {
-              ...headers,
-              ...(!this._apiKey ? { Authorization: `Bearer ${this._token}` } : {}),
-            },
-          })
+          await method(
+            `${this.apiEndpoint}/${API_VERSION}/${url}`,
+            data || {},
+            {
+              params: {
+                ...(this._apiKey ? { private_key: this._apiKey } : {}),
+                ...(this.queryParams ? this.queryParams : {}),
+              },
+              headers: {
+                ...headers,
+                ...(!this._apiKey
+                  ? { Authorization: `Bearer ${this._token}` }
+                  : {}),
+              },
+            }
+          )
         ).data;
       } else {
         return (
@@ -59,17 +70,27 @@ export class Highway {
             },
             headers: {
               ...headers,
-              ...(!this._apiKey ? { Authorization: `Bearer ${this._token}` } : {}),
+              ...(!this._apiKey
+                ? { Authorization: `Bearer ${this._token}` }
+                : {}),
             },
           })
         ).data;
       }
     } catch (error: any) {
       if (error.code === `ENOTFOUND` || error.code === `ECONNREFUSED`) {
-        throw new HighwayError(`${error.code} - api endpoint is not correctly set`, `highway.bad_endpoint`, 0);
+        throw new PlannerError(
+          `${error.code} - api endpoint is not correctly set`,
+          `planner.bad_endpoint`,
+          0
+        );
       }
       const { data, status } = error.response;
-      throw new HighwayError(`${status} - ${data.message}`, data.messageId, status);
+      throw new PlannerError(
+        `${status} - ${data.message}`,
+        data.messageId,
+        status
+      );
     }
   };
 

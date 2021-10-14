@@ -1,6 +1,6 @@
 {
   "name": "@smartmonkey/planner",
-  "version": "2.6.3",
+  "version": "0.0.1",
   "description": "This package allows the users to easily integrate SmartMonkey Planner services in third party services.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -16,13 +16,9 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com:smartmonkeyio/highway-services-js.git"
+    "url": "git+ssh://git@github.com/smartmonkeyio/highway-services-js.git"
   },
-  "author": {
-    "name": "Pablo Martínez",
-    "email": "pablo.martinez@smartmonkey.io",
-    "url": "https://github.com/pablomartinezm"
-  },
+  "author": "Pablo Martínez <pablo.martinez@smartmonkey.io> (https://github.com/pablomartinezm)",
   "keywords": [
     "api",
     "smartmonkey",
@@ -57,5 +53,12 @@
   ],
   "engines": {
     "node": ">=10.0.0"
+  },
+  "bugs": {
+    "url": "https://github.com/smartmonkeyio/highway-services-js/issues"
+  },
+  "directories": {
+    "lib": "lib",
+    "test": "test"
   }
 }

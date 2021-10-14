@@ -1,10 +1,15 @@
 import { IClientData } from "../common/interfaces/clients";
-import { IStopBase, IStopData, IStopDataExtended, IStopPagination } from "../common/interfaces/stops";
-import { Highway } from "./Highway";
+import {
+  IStopBase,
+  IStopData,
+  IStopDataExtended,
+  IStopPagination,
+} from "../common/interfaces/stops";
+import { Planner } from "./Planner";
 
 interface ICreateStopsProps {
   planId?: string;
-  projectId?: string 
+  projectId?: string;
   stops: IStopDataExtended[];
 }
 
@@ -18,21 +23,35 @@ interface ISearchStopsProps {
 }
 
 export class Stop {
-  private highway: Highway;
+  private planner: Planner;
 
-  constructor(hw: Highway) {
-    this.highway = hw;
+  constructor(hw: Planner) {
+    this.planner = hw;
   }
 
-  createMany = async ({ stops, planId, projectId }: ICreateStopsProps): Promise<IStopData[]> => {
+  createMany = async ({
+    stops,
+    planId,
+    projectId,
+  }: ICreateStopsProps): Promise<IStopData[]> => {
     const params = new URLSearchParams();
     if (planId) params.append(`plan_id`, `${planId}`);
     if (projectId) params.append(`project_id`, `${projectId}`);
-    return this.highway.post(`stops?${params.toString()}`, stops);
+    return this.planner.post(`stops?${params.toString()}`, stops);
   };
 
   fromClient = (client: IClientData): IStopBase => {
-    const { id, external_id, label, location, comments, phone, email, url, reference_person } = client;
+    const {
+      id,
+      external_id,
+      label,
+      location,
+      comments,
+      phone,
+      email,
+      url,
+      reference_person,
+    } = client;
     const newStop: IStopBase = {
       label,
       location,
@@ -51,22 +70,32 @@ export class Stop {
       time_windows: client.default_time_windows,
       custom_fields: client.custom_fields,
     };
-    return Object.entries(newStop).reduce((a, [k, v]) => (v === undefined ? a : { ...a, [k]: v }), {});
+    return Object.entries(newStop).reduce(
+      (a, [k, v]) => (v === undefined ? a : { ...a, [k]: v }),
+      {}
+    );
   };
 
   update = async (stopId: string, stop: IStopBase): Promise<IStopData> => {
-    return this.highway.put(`stop/${stopId}`, stop);
+    return this.planner.put(`stop/${stopId}`, stop);
   };
 
   delete = async (stopId: string): Promise<IStopData> => {
-    return this.highway.delete(`stop/${stopId}`);
+    return this.planner.delete(`stop/${stopId}`);
   };
 
   get = async (stopID: string): Promise<IStopData> => {
-    return this.highway.get(`stop/${stopID}`);
+    return this.planner.get(`stop/${stopID}`);
   };
 
-  search = async ({ projectId, offset = 0, limit = 20, text, sort, deleted = false }: ISearchStopsProps): Promise<IStopPagination> => {
+  search = async ({
+    projectId,
+    offset = 0,
+    limit = 20,
+    text,
+    sort,
+    deleted = false,
+  }: ISearchStopsProps): Promise<IStopPagination> => {
     const params = new URLSearchParams();
     params.append(`project_id`, `${projectId}`);
     params.append(`offset`, `${offset}`);
@@ -75,6 +104,6 @@ export class Stop {
     if (sort) params.append(`sort`, `${sort}`);
     if (sort) params.append(`sort`, `${sort}`);
     if (deleted) params.append(`deleted`, `${deleted}`);
-    return this.highway.get(`stops/search?${params.toString()}`);
+    return this.planner.get(`stops/search?${params.toString()}`);
   };
 }

@@ -1,6 +1,10 @@
-import { IDriverBase, IDriverData, IDriverPagination } from "../common/interfaces/drivers";
+import {
+  IDriverBase,
+  IDriverData,
+  IDriverPagination,
+} from "../common/interfaces/drivers";
 import { IVehicleData } from "../common/interfaces/vehicles";
-import { Highway } from "./Highway";
+import { Planner } from "./Planner";
 
 interface ICreateDriversProps {
   planId: string;
@@ -16,16 +20,19 @@ interface ISearchDriversProps {
 }
 
 export class Driver {
-  private highway: Highway;
+  private planner: Planner;
 
-  constructor(hw: Highway) {
-    this.highway = hw;
+  constructor(hw: Planner) {
+    this.planner = hw;
   }
 
-  createMany = async ({ drivers, planId }: ICreateDriversProps): Promise<IDriverData[]> => {
+  createMany = async ({
+    drivers,
+    planId,
+  }: ICreateDriversProps): Promise<IDriverData[]> => {
     const params = new URLSearchParams();
     params.append(`plan_id`, `${planId}`);
-    return this.highway.post(`drivers?${params.toString()}`, drivers);
+    return this.planner.post(`drivers?${params.toString()}`, drivers);
   };
 
   /**
@@ -80,23 +87,32 @@ export class Driver {
     };
   };
 
-  update = async (driverId: string, driver: IDriverBase): Promise<IDriverData> => {
-    return this.highway.put(`driver/${driverId}`, driver);
+  update = async (
+    driverId: string,
+    driver: IDriverBase
+  ): Promise<IDriverData> => {
+    return this.planner.put(`driver/${driverId}`, driver);
   };
 
   delete = async (driverId: string): Promise<IDriverData> => {
-    return this.highway.delete(`driver/${driverId}`);
+    return this.planner.delete(`driver/${driverId}`);
   };
 
   get = async (driverId: string): Promise<IDriverData> => {
-    return this.highway.get(`driver/${driverId}`);
+    return this.planner.get(`driver/${driverId}`);
   };
 
   optimize = async (driverId: string): Promise<IDriverData> => {
-    return this.highway.post(`driver/${driverId}/optimize`);
+    return this.planner.post(`driver/${driverId}/optimize`);
   };
 
-  search = async ({ projectId, offset = 0, limit = 20, text, sort }: ISearchDriversProps): Promise<IDriverPagination> => {
+  search = async ({
+    projectId,
+    offset = 0,
+    limit = 20,
+    text,
+    sort,
+  }: ISearchDriversProps): Promise<IDriverPagination> => {
     const params = new URLSearchParams();
     params.append(`project_id`, `${projectId}`);
     params.append(`offset`, `${offset}`);
@@ -104,6 +120,6 @@ export class Driver {
     if (text) params.append(`text`, `${text}`);
     if (sort) params.append(`sort`, `${sort}`);
     if (sort) params.append(`sort`, `${sort}`);
-    return this.highway.get(`drivers/search?${params.toString()}`);
+    return this.planner.get(`drivers/search?${params.toString()}`);
   };
 }
