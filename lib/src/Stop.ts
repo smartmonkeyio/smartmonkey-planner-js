@@ -1,16 +1,14 @@
-import { IClientData } from "../common/interfaces/clients";
-import {
-  IStopBase,
-  IStopData,
-  IStopDataExtended,
-  IStopPagination,
-} from "../common/interfaces/stops";
+import { ClientDTO } from "../common/interfaces/client/ClientDTO";
+import { PaginatedResult } from "../common/interfaces/shared/PaginatedResult";
+import { CreateStop } from "../common/interfaces/stop/CreateStop";
+import { StopDTO } from "../common/interfaces/stop/StopDTO";
+import { UpdateStop } from "../common/interfaces/stop/UpdateStop";
 import { Planner } from "./Planner";
 
 interface ICreateStopsProps {
   planId?: string;
   projectId?: string;
-  stops: IStopDataExtended[];
+  stops: CreateStop[];
 }
 
 interface ISearchStopsProps {
@@ -33,14 +31,14 @@ export class Stop {
     stops,
     planId,
     projectId,
-  }: ICreateStopsProps): Promise<IStopData[]> => {
+  }: ICreateStopsProps): Promise<StopDTO[]> => {
     const params = new URLSearchParams();
     if (planId) params.append(`plan_id`, `${planId}`);
     if (projectId) params.append(`project_id`, `${projectId}`);
     return this.planner.post(`stops?${params.toString()}`, stops);
   };
 
-  fromClient = (client: IClientData): IStopBase => {
+  fromClient = (client: ClientDTO): CreateStop => {
     const {
       id,
       external_id,
@@ -52,7 +50,7 @@ export class Stop {
       url,
       reference_person,
     } = client;
-    const newStop: IStopBase = {
+    const newStop: CreateStop = {
       label,
       location,
       comments,
@@ -76,15 +74,15 @@ export class Stop {
     );
   };
 
-  update = async (stopId: string, stop: IStopBase): Promise<IStopData> => {
+  update = async (stopId: string, stop: UpdateStop): Promise<StopDTO> => {
     return this.planner.put(`stop/${stopId}`, stop);
   };
 
-  delete = async (stopId: string): Promise<IStopData> => {
+  delete = async (stopId: string): Promise<StopDTO> => {
     return this.planner.delete(`stop/${stopId}`);
   };
 
-  get = async (stopID: string): Promise<IStopData> => {
+  get = async (stopID: string): Promise<StopDTO> => {
     return this.planner.get(`stop/${stopID}`);
   };
 
@@ -95,7 +93,7 @@ export class Stop {
     text,
     sort,
     deleted = false,
-  }: ISearchStopsProps): Promise<IStopPagination> => {
+  }: ISearchStopsProps): Promise<PaginatedResult<StopDTO>> => {
     const params = new URLSearchParams();
     params.append(`project_id`, `${projectId}`);
     params.append(`offset`, `${offset}`);

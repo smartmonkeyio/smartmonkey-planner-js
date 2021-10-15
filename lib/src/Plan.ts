@@ -1,10 +1,8 @@
-import {
-  IPlanBase,
-  IPlanData,
-  IPlanPagination,
-} from "../common/interfaces/plans";
-import { IDriverBase } from "../common/interfaces/drivers";
-import { IStopBase } from "../common/interfaces/stops";
+import { CreateDriver } from "../common/interfaces/driver/CreateDriver";
+import { CreatePlan } from "../common/interfaces/plan/CreatePlan";
+import { PlanDTO } from "../common/interfaces/plan/PlanDTO";
+import { PaginatedResult } from "../common/interfaces/shared/PaginatedResult";
+import { CreateStop } from "../common/interfaces/stop/CreateStop";
 import { Planner } from "./Planner";
 
 export type IListPlansProps = {
@@ -25,24 +23,21 @@ export class Plan {
     this.planner = hw;
   }
 
-  create = async (
-    planData: IPlanBase,
-    projectId: string
-  ): Promise<IPlanData> => {
+  create = async (plan: CreatePlan, projectId: string): Promise<PlanDTO> => {
     const params = new URLSearchParams();
     params.append(`project_id`, `${projectId}`);
-    return this.planner.post(`plan?${params.toString()}`, planData);
+    return this.planner.post(`plan?${params.toString()}`, plan);
   };
 
-  update = async (planId: string, plan: IPlanBase): Promise<IPlanData> => {
+  update = async (planId: string, plan: CreatePlan): Promise<PlanDTO> => {
     return this.planner.put(`plan/${planId}`, plan);
   };
 
-  delete = async (planId: string): Promise<IPlanData> => {
+  delete = async (planId: string): Promise<PlanDTO> => {
     return this.planner.delete(`plan/${planId}`);
   };
 
-  get = async (planId: string): Promise<IPlanData> => {
+  get = async (planId: string): Promise<PlanDTO> => {
     return this.planner.get(`plan/${planId}`);
   };
 
@@ -55,7 +50,7 @@ export class Plan {
     fromDate,
     toDate,
     sort,
-  }: IListPlansProps): Promise<IPlanPagination> => {
+  }: IListPlansProps): Promise<PaginatedResult<PlanDTO>> => {
     const params = new URLSearchParams();
     params.append(`project_id`, projectId);
     params.append(`offset`, `${offset}`);
@@ -68,7 +63,7 @@ export class Plan {
     return this.planner.get(`plans?${params.toString()}`);
   };
 
-  optimize = async (planId: string): Promise<IPlanData> => {
+  optimize = async (planId: string): Promise<PlanDTO> => {
     return this.planner.post(`plan/${planId}/optimize`);
   };
 
@@ -81,15 +76,15 @@ export class Plan {
     return this.planner.post(`plan/${planId}/optimize/async`);
   };
 
-  addStops = async (planId: string, stops: IStopBase[]): Promise<IPlanData> => {
+  addStops = async (planId: string, stops: CreateStop[]): Promise<PlanDTO> => {
     await this.planner.stop.createMany({ stops, planId });
     return this.get(planId);
   };
 
   addDrivers = async (
     planId: string,
-    drivers: IDriverBase[]
-  ): Promise<IPlanData> => {
+    drivers: CreateDriver[]
+  ): Promise<PlanDTO> => {
     await this.planner.driver.createMany({ drivers, planId });
     return this.get(planId);
   };

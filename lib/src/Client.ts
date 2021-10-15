@@ -1,15 +1,13 @@
-import {
-  IClientBase,
-  IClientData,
-  IClientFlat,
-  IClientPagination,
-} from "../common/interfaces/clients";
-import { IStopData } from "../common/interfaces/stops";
+import { UpdateClient } from "../common/interfaces/client/UpdateClient";
+import { ClientDTO } from "../common/interfaces/client/ClientDTO";
+import { PaginatedResult } from "../common/interfaces/shared/PaginatedResult";
 import { Planner } from "./Planner";
+import { StopDTO } from "../common/interfaces/stop/StopDTO";
+import { CreateClient } from "../common/interfaces/client/CreateClient";
 
 interface ICreateClientsProps {
   projectId: string;
-  clients: IClientBase[];
+  clients: ClientDTO[];
 }
 
 interface IListClientsProps {
@@ -30,24 +28,21 @@ export class Client {
   createMany = async ({
     clients,
     projectId,
-  }: ICreateClientsProps): Promise<IClientData[]> => {
+  }: ICreateClientsProps): Promise<ClientDTO[]> => {
     const params = new URLSearchParams();
     params.append(`project_id`, `${projectId}`);
     return this.planner.post(`clients?${params.toString()}`, clients);
   };
 
-  update = async (
-    clientId: string,
-    client: IClientBase
-  ): Promise<IClientData> => {
+  update = async (clientId: string, client: UpdateClient): Promise<Client> => {
     return this.planner.put(`client/${clientId}`, client);
   };
 
-  delete = async (clientId: string): Promise<IClientData> => {
+  delete = async (clientId: string): Promise<ClientDTO> => {
     return this.planner.delete(`client/${clientId}`);
   };
 
-  get = async (clientId: string): Promise<IClientData> => {
+  get = async (clientId: string): Promise<ClientDTO> => {
     return this.planner.get(`client/${clientId}`);
   };
 
@@ -57,7 +52,7 @@ export class Client {
     limit = 20,
     text,
     sort,
-  }: IListClientsProps): Promise<IClientPagination> => {
+  }: IListClientsProps): Promise<PaginatedResult<ClientDTO>> => {
     const params = new URLSearchParams();
     params.append(`project_id`, `${projectId}`);
     params.append(`offset`, `${offset}`);
@@ -67,32 +62,30 @@ export class Client {
     return this.planner.get(`clients/search?${params.toString()}`);
   };
 
-  listFlat = async (projectId: string): Promise<IClientFlat[]> => {
-    const params = new URLSearchParams();
-    params.append(`project_id`, `${projectId}`);
-    return this.planner.get(`clients/flat?${params.toString()}`);
-  };
+  // listFlat = async (projectId: string): Promise<IClientFlat[]> => {
+  //   const params = new URLSearchParams();
+  //   params.append(`project_id`, `${projectId}`);
+  //   return this.planner.get(`clients/flat?${params.toString()}`);
+  // };
 
-  fromStop = (stop: IStopData): IClientBase => {
+  fromStop = (stop: StopDTO): CreateClient => {
     const {
       label,
       location,
       comments,
       phone,
       email,
-      url,
       location_details,
       client_external_id,
       reference_person,
     } = stop;
-    const newClient: IClientBase = {
+    const newClient: CreateClient = {
       label,
       location,
       location_details,
       comments,
       phone,
       email,
-      url,
       reference_person,
       external_id: client_external_id,
       default_requires: stop.requires,

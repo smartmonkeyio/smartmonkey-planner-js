@@ -1,13 +1,20 @@
 import axios from "axios";
 import { API_VERSION, PLANNER_ENDPOINT } from "../common/constants";
 import { PlannerError } from "../common/errors";
-import { IPlannerOptions } from "../common/interfaces/common";
 import { Client } from "./Client";
 import { Plan } from "./Plan";
 import { Driver } from "./Driver";
 import { Stop } from "./Stop";
 import { Vehicle } from "./Vehicle";
 import { Webhook } from "./Webhook";
+
+export interface IPlannerOptions {
+  bearer?: string;
+  apiEndpoint?: string;
+  queryParams?: {
+    [param: string]: string;
+  };
+}
 
 export class Planner {
   private _token?: string;

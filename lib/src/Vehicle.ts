@@ -1,15 +1,12 @@
-import { IDriverData } from "../common/interfaces/drivers";
-import {
-  IVehicleBase,
-  IVehicleData,
-  IVehicleFlat,
-  IVehiclePagination,
-} from "../common/interfaces/vehicles";
+import { DriverDTO } from "../common/interfaces/driver/DriverDTO";
+import { PaginatedResult } from "../common/interfaces/shared/PaginatedResult";
+import { CreateVehicle } from "../common/interfaces/vehicle/CreateVehicle";
+import { VehicleDTO } from "../common/interfaces/vehicle/VehicleDTO";
 import { Planner } from "./Planner";
 
 interface ICreateVehiclesProps {
   projectId: string;
-  vehicles: IVehicleBase[];
+  vehicles: CreateVehicle[];
 }
 
 interface IListVehiclesProps {
@@ -30,24 +27,22 @@ export class Vehicle {
   createMany = async ({
     vehicles,
     projectId,
-  }: ICreateVehiclesProps): Promise<IVehicleData[]> => {
+  }: ICreateVehiclesProps): Promise<VehicleDTO[]> => {
     const params = new URLSearchParams();
     params.append(`project_id`, `${projectId}`);
     return this.planner.post(`vehicles?${params.toString()}`, vehicles);
   };
 
-  update = async (
-    vehicleId: string,
-    vehicle: IVehicleBase
-  ): Promise<IVehicleData> => {
+  // TODO:
+  update = async (vehicleId: string, vehicle: any): Promise<VehicleDTO> => {
     return this.planner.put(`vehicle/${vehicleId}`, vehicle);
   };
 
-  delete = async (vehicleId: string): Promise<IVehicleData> => {
+  delete = async (vehicleId: string): Promise<VehicleDTO> => {
     return this.planner.delete(`vehicle/${vehicleId}`);
   };
 
-  get = async (vehicleID: string): Promise<IVehicleData> => {
+  get = async (vehicleID: string): Promise<VehicleDTO> => {
     return this.planner.get(`vehicle/${vehicleID}`);
   };
 
@@ -57,7 +52,7 @@ export class Vehicle {
     limit = 20,
     text,
     sort,
-  }: IListVehiclesProps): Promise<IVehiclePagination> => {
+  }: IListVehiclesProps): Promise<PaginatedResult<VehicleDTO>> => {
     const params = new URLSearchParams();
     params.append(`project_id`, `${projectId}`);
     params.append(`offset`, `${offset}`);
@@ -67,16 +62,16 @@ export class Vehicle {
     return this.planner.get(`vehicles?${params.toString()}`);
   };
 
-  listFlat = async (projectId: string): Promise<IVehicleFlat[]> => {
-    const params = new URLSearchParams();
-    params.append(`project_id`, `${projectId}`);
-    return this.planner.get(`vehicles/flat?${params.toString()}`);
-  };
+  // listFlat = async (projectId: string): Promise<IVehicleFlat[]> => {
+  //   const params = new URLSearchParams();
+  //   params.append(`project_id`, `${projectId}`);
+  //   return this.planner.get(`vehicles/flat?${params.toString()}`);
+  // };
 
   /**
    * Create a new driver from a vehicle object.
    */
-  fromDriver = (driver: IDriverData): IVehicleBase => {
+  fromDriver = (driver: DriverDTO): CreateVehicle => {
     const {
       end_location,
       start_location,
@@ -86,9 +81,6 @@ export class Vehicle {
       provides,
       time_window,
       plate,
-      vehicle_model,
-      icon,
-      brand,
       phone,
       label,
       email,
@@ -97,7 +89,7 @@ export class Vehicle {
       price_per_distance,
     } = driver;
 
-    const newVehicle: IVehicleBase = {
+    const newVehicle: CreateVehicle = {
       default_start_location: start_location,
       default_end_location: end_location,
       default_max_volume: max_volume,
@@ -106,9 +98,6 @@ export class Vehicle {
       default_provides: provides,
       default_time_window: time_window,
       plate,
-      vehicle_model,
-      icon,
-      brand,
       phone,
       label,
       email,

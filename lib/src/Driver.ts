@@ -1,14 +1,11 @@
-import {
-  IDriverBase,
-  IDriverData,
-  IDriverPagination,
-} from "../common/interfaces/drivers";
-import { IVehicleData } from "../common/interfaces/vehicles";
+import { CreateDriver } from "../common/interfaces/driver/CreateDriver";
+import { DriverDTO } from "../common/interfaces/driver/DriverDTO";
+import { PaginatedResult } from "../common/interfaces/shared/PaginatedResult";
 import { Planner } from "./Planner";
 
 interface ICreateDriversProps {
   planId: string;
-  drivers: IDriverBase[];
+  drivers: CreateDriver[];
 }
 
 interface ISearchDriversProps {
@@ -29,7 +26,7 @@ export class Driver {
   createMany = async ({
     drivers,
     planId,
-  }: ICreateDriversProps): Promise<IDriverData[]> => {
+  }: ICreateDriversProps): Promise<DriverDTO[]> => {
     const params = new URLSearchParams();
     params.append(`plan_id`, `${planId}`);
     return this.planner.post(`drivers?${params.toString()}`, drivers);
@@ -38,7 +35,7 @@ export class Driver {
   /**
    * Create a new driver from a vehicle object.
    */
-  fromVehicle = (vehicle: IVehicleData): IDriverBase => {
+  fromVehicle = (vehicle: any): CreateDriver => {
     const {
       id,
       default_end_location,
@@ -51,7 +48,6 @@ export class Driver {
       default_max_services,
       plate,
       vehicle_model,
-      icon,
       color,
       brand,
       phone,
@@ -64,6 +60,7 @@ export class Driver {
 
     return {
       vehicle_id: id,
+      status: "not_started",
       start_location: default_start_location,
       end_location: default_end_location,
       max_distance: default_max_distance,
@@ -75,7 +72,6 @@ export class Driver {
       time_window: default_time_window,
       plate,
       vehicle_model,
-      icon,
       color,
       brand,
       phone,
@@ -89,20 +85,20 @@ export class Driver {
 
   update = async (
     driverId: string,
-    driver: IDriverBase
-  ): Promise<IDriverData> => {
+    driver: CreateDriver
+  ): Promise<DriverDTO> => {
     return this.planner.put(`driver/${driverId}`, driver);
   };
 
-  delete = async (driverId: string): Promise<IDriverData> => {
+  delete = async (driverId: string): Promise<DriverDTO> => {
     return this.planner.delete(`driver/${driverId}`);
   };
 
-  get = async (driverId: string): Promise<IDriverData> => {
+  get = async (driverId: string): Promise<DriverDTO> => {
     return this.planner.get(`driver/${driverId}`);
   };
 
-  optimize = async (driverId: string): Promise<IDriverData> => {
+  optimize = async (driverId: string): Promise<DriverDTO> => {
     return this.planner.post(`driver/${driverId}/optimize`);
   };
 
@@ -112,7 +108,7 @@ export class Driver {
     limit = 20,
     text,
     sort,
-  }: ISearchDriversProps): Promise<IDriverPagination> => {
+  }: ISearchDriversProps): Promise<PaginatedResult<DriverDTO>> => {
     const params = new URLSearchParams();
     params.append(`project_id`, `${projectId}`);
     params.append(`offset`, `${offset}`);
