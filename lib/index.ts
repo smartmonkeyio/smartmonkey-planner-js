@@ -1,5 +1,4 @@
-import { IPlannerOptions } from "./common/interfaces/common";
-import { Planner } from "./src/Planner";
+import { IPlannerOptions, Planner } from "./src/Planner";
 
 export function createPlanner(
   apiKey: string,
