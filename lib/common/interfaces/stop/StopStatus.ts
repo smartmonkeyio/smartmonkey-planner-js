@@ -1,1 +1,1 @@
-export type StopStatus = `completed` | `canceled` | `pending`;
+export type StopStatus = `pending` | `incomplete` | `completed` | `canceled`;
