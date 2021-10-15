@@ -6,5 +6,5 @@ export interface GeoFenceDTO {
   color: string;
   enabled: boolean;
   label: string;
-  coordinates: Array<[number, number]>;
+  coordinates: TimeWindows;
 }

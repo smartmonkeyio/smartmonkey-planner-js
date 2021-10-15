@@ -19,9 +19,7 @@ export interface PlanDTO {
   updated_at?: string;
   deleted_at?: string;
   created_by: string;
-  deleted?: boolean;
-}
-export interface PlanDetailsDTO extends PlanDTO {
+  deleted?: boolean; 
   stops: StopDTO[];
   drivers: DriverDTO[];
   geo_fences: GeoFenceDTO[];

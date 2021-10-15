@@ -1,4 +1,4 @@
-import { TimeWindow } from "../../lib/common/interfaces/common";
+import { TimeWindow } from "../../lib/common/interfaces/shared/TimeWindow";
 
 export const vehicles = {
   vehicle1: {

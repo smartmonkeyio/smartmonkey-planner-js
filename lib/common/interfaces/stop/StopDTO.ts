@@ -28,7 +28,7 @@ export interface StopDTO {
   // Constraints
   weight?: number;
   volume?: number;
-  time_windows?: Array<[number, number]>;
+  time_windows?: TimeWindows;
   requires?: string[];
   duration?: number;
 

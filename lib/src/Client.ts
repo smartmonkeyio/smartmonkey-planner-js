@@ -1,5 +1,5 @@
 import { UpdateClient } from "../common/interfaces/client/UpdateClient";
-import { ClientDTO } from "../common/interfaces/client/ClientDTO";
+import { ClientDTO, ClientFlatDTO } from "../common/interfaces/client/ClientDTO";
 import { PaginatedResult } from "../common/interfaces/shared/PaginatedResult";
 import { Planner } from "./Planner";
 import { StopDTO } from "../common/interfaces/stop/StopDTO";
@@ -7,7 +7,7 @@ import { CreateClient } from "../common/interfaces/client/CreateClient";
 
 interface ICreateClientsProps {
   projectId: string;
-  clients: ClientDTO[];
+  clients: CreateClient[];
 }
 
 interface IListClientsProps {
@@ -34,7 +34,7 @@ export class Client {
     return this.planner.post(`clients?${params.toString()}`, clients);
   };
 
-  update = async (clientId: string, client: UpdateClient): Promise<Client> => {
+  update = async (clientId: string, client: UpdateClient): Promise<ClientDTO> => {
     return this.planner.put(`client/${clientId}`, client);
   };
 
@@ -62,11 +62,11 @@ export class Client {
     return this.planner.get(`clients/search?${params.toString()}`);
   };
 
-  // listFlat = async (projectId: string): Promise<IClientFlat[]> => {
-  //   const params = new URLSearchParams();
-  //   params.append(`project_id`, `${projectId}`);
-  //   return this.planner.get(`clients/flat?${params.toString()}`);
-  // };
+  listFlat = async (projectId: string): Promise<ClientFlatDTO[]> => {
+    const params = new URLSearchParams();
+    params.append(`project_id`, `${projectId}`);
+    return this.planner.get(`clients/flat?${params.toString()}`);
+  };
 
   fromStop = (stop: StopDTO): CreateClient => {
     const {

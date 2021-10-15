@@ -16,8 +16,6 @@ export interface CreateGeoFenceDTO {
 }
 
 export interface CreatePlan {
-  user_id: string;
-  project_id: string;
   drivers?: CreateDriver[];
   stops?: CreateStop[];
   status?: PlanStatus;

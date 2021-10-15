@@ -12,7 +12,7 @@ export interface CreateClient {
   reference_person?: string;
   default_duration?: number;
   default_requires?: string[];
-  default_time_windows?: Array<[number, number]>;
+  default_time_windows?: TimeWindows;
   default_volume?: number;
   default_weight?: number;
   custom_fields?: Record<string, any>;

@@ -1,5 +1,4 @@
-import { TimeWindow } from "../../lib/common/interfaces/common";
-import { IStopStatus } from "../../lib/common/interfaces/stops";
+import { TimeWindows } from "../../lib/common/interfaces/shared/TimeWindow";
 
 export const stops = {
   stop1: {
@@ -19,10 +18,9 @@ export const stops = {
     url: `https://test.com`,
     duration: 3600,
     requires: [`frio`],
-    time_windows: [[0, 3600]] as TimeWindow[],
+    time_windows: [[0, 3600]] as TimeWindows,
     volume: 1000,
     weight: 1000,
-    status: `pending` as IStopStatus,
 
     custom_fields: {},
   },

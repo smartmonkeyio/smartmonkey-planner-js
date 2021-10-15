@@ -1,19 +1,19 @@
 import axios from "axios";
 import * as assert from "assert";
-import { createHighway } from "../lib/index";
-import { Highway } from "../lib/src/Highway";
+import { createPlanner } from "../lib/index";
+import { Planner } from "../lib/src/Planner";
 import * as common from "./common";
 import * as loader from "./loaders/stops.loader";
-import { IPlanData } from "../lib/common/interfaces/plans";
+import { PlanDTO } from "../lib/common/interfaces/plan/PlanDTO";
 
 describe(`Test Stops API`, () => {
-  let highway: Highway;
-  let plan: IPlanData;
+  let highway: Planner;
+  let plan: PlanDTO;
   let allStopsIds: string[] = [];
   let allProjectIds: string[] = [];
   before(async () => {
     const key = common.key;
-    highway = createHighway(key);
+    highway = createPlanner(key);
 
     const allProjects = await axios.get(`${common.backend}/projects?private_key=${highway.apiKey}`);
 
