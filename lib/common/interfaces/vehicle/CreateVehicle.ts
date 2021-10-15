@@ -1,4 +1,5 @@
 import { Location } from "../shared/Location";
+import { TimeWindow } from "../shared/TimeWindow";
 
 export interface CreateVehicle {
   external_id?: string;

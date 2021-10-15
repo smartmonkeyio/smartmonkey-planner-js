@@ -6,25 +6,25 @@ import * as common from "./common";
 describe(`Create a Planner Client`, () => {
   const privateKey = common.key;
   const token = common.token;
-  let highway: Planner;
+  let planner: Planner;
 
   it(`it should create a Planner privateKey`, () => {
-    highway = createPlanner(privateKey);
-    assert.strictEqual(highway.apiKey, privateKey);
+    planner = createPlanner({ apiKey: privateKey });
+    assert.strictEqual(planner.apiKey, privateKey);
   });
   it(`it should create a Planner token`, () => {
-    highway = createPlanner(``, { bearer: token });
-    assert.strictEqual(highway.token, token);
+    planner = createPlanner({ apiKey: ``, options: { bearer: token }});
+    assert.strictEqual(planner.token, token);
   });
   it(`it should create a both key and token`, () => {
-    highway = createPlanner(privateKey, { bearer: token });
-    assert.strictEqual(highway.apiKey, privateKey);
-    assert.strictEqual(highway.token, token);
+    planner = createPlanner({ apiKey: privateKey, options: { bearer: token }});
+    assert.strictEqual(planner.apiKey, privateKey);
+    assert.strictEqual(planner.token, token);
   });
   it(`Should fail to search plans with a wrong key`, async () => {
     try {
-      highway = createPlanner(`BadKey`);
-      await highway.plan.search({ offset: 0, limit: 20, projectId: `bad_id` });
+      planner = createPlanner({ apiKey: `BadKey`});
+      await planner.plan.search({ offset: 0, limit: 20, projectId: `bad_id` });
       throw new Error(`Should raise an exception with a bad key!`);
     } catch (exception) {
       // Everything worked
@@ -33,24 +33,24 @@ describe(`Create a Planner Client`, () => {
   });
   it(`Should fail to search plans with a wrong URL`, async () => {
     try {
-      highway = createPlanner(privateKey, {
+      planner = createPlanner({ apiKey: privateKey, options: {
         apiEndpoint: `http://localhost:1234/`,
-      });
-      await highway.plan.search({ offset: 0, limit: 20, projectId: `bad_id` });
+      }});
+      await planner.plan.search({ offset: 0, limit: 20, projectId: `bad_id` });
       throw new Error(`Should raise an exception with a bad key!`);
     } catch (exception) {
       // Everything worked
-      assert.strictEqual(exception.messageId, `highway.bad_endpoint`);
+      assert.strictEqual(exception.messageId, `planner.bad_endpoint`);
     }
   });
   it(`Should fail to search plans with a wrong URL`, async () => {
     try {
-      highway = createPlanner(privateKey, { apiEndpoint: `malformedurl` });
-      await highway.plan.search({ offset: 0, limit: 20, projectId: `bad_id` });
+      planner = createPlanner({ apiKey: privateKey, options: { apiEndpoint: `malformedurl` }});
+      await planner.plan.search({ offset: 0, limit: 20, projectId: `bad_id` });
       throw new Error(`Should raise an exception with a bad key!`);
     } catch (exception) {
       // Everything worked
-      assert.strictEqual(exception.messageId, `highway.bad_endpoint`);
+      assert.strictEqual(exception.messageId, `planner.bad_endpoint`);
     }
   });
 });

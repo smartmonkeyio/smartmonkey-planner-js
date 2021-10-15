@@ -8,7 +8,7 @@
       "type": "node",
       "request": "launch",
       "name": "Launch Program",
-      "program": "${workspaceFolder}/dist/js/src/index.js",
+      "program": "${workspaceFolder}/dist/index.js",
       "preLaunchTask": "yarn build",
       "args": [
         "--no-deprecation"
@@ -30,12 +30,12 @@
         "--timeout",
         "999999",
         "--colors",
-        "${workspaceFolder}/src/**/*.spec.ts",
+        "${workspaceFolder}/test/**/*.spec.ts",
         "--debug-brk",
         "-g=\"Test Plans API\""
       ],
       "env": {
-        "HIGHWAY_ENVIRONMENT": "TEST"
+        "PLANNER_ENVIRONMENT": "TEST"
       },
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen",

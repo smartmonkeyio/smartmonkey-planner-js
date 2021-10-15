@@ -1,4 +1,5 @@
 import { Location } from "../shared/Location";
+import { TimeWindow } from "../shared/TimeWindow";
 import { DriverStatus } from "./DriverStatus";
 
 export interface UpdateDriver {

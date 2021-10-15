@@ -1,4 +1,5 @@
 import { Location } from "../shared/Location";
+import { TimeWindows } from "../shared/TimeWindow";
 
 export interface UpdateStop {
   client_id?: string;

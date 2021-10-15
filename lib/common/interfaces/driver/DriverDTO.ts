@@ -1,4 +1,5 @@
 import { Location } from "../shared/Location";
+import { TimeWindow } from "../shared/TimeWindow";
 import { StopDTO } from "../stop/StopDTO";
 import { DriverStatus } from "./DriverStatus";
 

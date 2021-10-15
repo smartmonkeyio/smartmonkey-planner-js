@@ -3,6 +3,7 @@ import { StopStatus } from "./StopStatus";
 import { TaskDTO } from "../task/TaskDTO";
 import { EventDTO } from "../event/EventDTO";
 import { ReportDTO } from "../report/ReportDTO";
+import { TimeWindows } from "../shared/TimeWindow";
 
 export interface StopDTO {
   id: string;

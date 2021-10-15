@@ -18,7 +18,7 @@ export interface IPlannerOptions {
 
 export class Planner {
   private _token?: string;
-  private _apiKey: string;
+  private _apiKey?: string;
   private apiEndpoint: string;
   private queryParams: { [param: string]: string } | undefined;
 
@@ -29,7 +29,7 @@ export class Planner {
   stop: Stop;
   vehicle: Vehicle;
 
-  constructor(apiKey: string, options: IPlannerOptions) {
+  constructor({ apiKey, options } : { apiKey?: string; options: IPlannerOptions; }) {
     this._token = options.bearer;
     this._apiKey = apiKey;
     this.client = new Client(this);
@@ -117,7 +117,7 @@ export class Planner {
     return this._request(axios.put, url, data, headers);
   };
 
-  get apiKey(): string {
+  get apiKey(): string | void {
     return this._apiKey;
   }
   get token(): string | void {
