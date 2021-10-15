@@ -1,4 +1,5 @@
 import { Location } from "../shared/Location";
+import { StopDTO } from "../stop/StopDTO";
 import { DriverStatus } from "./DriverStatus";
 
 export interface DriverDTO {
