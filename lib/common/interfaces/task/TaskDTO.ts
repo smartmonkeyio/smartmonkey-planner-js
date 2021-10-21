@@ -1,7 +1,9 @@
+import { TaskStatus } from "./TaskStatus";
+
 export interface TaskDTO {
   id: string;
   stop_id: string;
-  status: string;
+  status: TaskStatus;
   external_id?: string;
   label?: string;
   barcode?: string;
