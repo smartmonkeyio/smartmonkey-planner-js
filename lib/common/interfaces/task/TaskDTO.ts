@@ -4,9 +4,9 @@ export interface TaskDTO {
   id: string;
   stop_id: string;
   status: TaskStatus;
-  external_id?: string;
   label?: string;
   barcode?: string;
+  comments?: string;
 
   custom_fields?: Record<string, any>;
 
