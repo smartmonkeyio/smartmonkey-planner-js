@@ -1,7 +1,7 @@
 import { DriverDTO } from "../common/interfaces/driver/DriverDTO";
 import { PaginatedResult } from "../common/interfaces/shared/PaginatedResult";
 import { CreateVehicle } from "../common/interfaces/vehicle/CreateVehicle";
-import { VehicleDTO } from "../common/interfaces/vehicle/VehicleDTO";
+import { VehicleDTO, VehicleFlatDTO } from "../common/interfaces/vehicle/VehicleDTO";
 import { Planner } from "./Planner";
 
 interface ICreateVehiclesProps {
@@ -62,11 +62,11 @@ export class Vehicle {
     return this.planner.get(`vehicles?${params.toString()}`);
   };
 
-  // listFlat = async (projectId: string): Promise<IVehicleFlat[]> => {
-  //   const params = new URLSearchParams();
-  //   params.append(`project_id`, `${projectId}`);
-  //   return this.planner.get(`vehicles/flat?${params.toString()}`);
-  // };
+  listFlat = async (projectId: string): Promise<VehicleFlatDTO[]> => {
+    const params = new URLSearchParams();
+    params.append(`project_id`, `${projectId}`);
+    return this.planner.get(`vehicles/flat?${params.toString()}`);
+  };
 
   /**
    * Create a new driver from a vehicle object.

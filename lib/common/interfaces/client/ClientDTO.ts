@@ -1,4 +1,5 @@
 import { Location } from "../shared/Location";
+import { TimeWindows } from "../shared/TimeWindow";
 
 export interface ClientDTO {
   id: string;
@@ -15,7 +16,7 @@ export interface ClientDTO {
   reference_person?: string;
   default_duration?: number;
   default_requires?: string[];
-  default_time_windows?: Array<[number, number]>;
+  default_time_windows?: TimeWindows;
   default_volume?: number;
   default_weight?: number;
   custom_fields?: Record<string, any>;
@@ -26,4 +27,10 @@ export interface ClientDTO {
   created_at?: Date;
   updated_at?: Date;
   deleted_at?: Date;
+}
+
+export interface ClientFlatDTO {
+  id: string;
+  lat: number;
+  lng: number;
 }

@@ -1,4 +1,5 @@
 import { Location } from "../shared/Location";
+import { TimeWindow } from "../shared/TimeWindow";
 import { DriverStatus } from "./DriverStatus";
 
 export interface UpdateDriver {
@@ -12,7 +13,7 @@ export interface UpdateDriver {
   color?: string;
   vehicle_model?: string;
   brand?: string;
-  time_window?: [number, number];
+  time_window?: TimeWindow;
   max_distance?: number;
   max_weight?: number;
   max_volume?: number;

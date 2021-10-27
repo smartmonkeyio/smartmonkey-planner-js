@@ -1,10 +1,12 @@
+import { TaskStatus } from "./TaskStatus";
+
 export interface TaskDTO {
   id: string;
   stop_id: string;
-  status: string;
-  external_id?: string;
+  status: TaskStatus;
   label?: string;
   barcode?: string;
+  comments?: string;
 
   custom_fields?: Record<string, any>;
 

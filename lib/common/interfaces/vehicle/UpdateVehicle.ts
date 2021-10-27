@@ -1,4 +1,5 @@
 import { Location } from "../shared/Location";
+import { TimeWindow } from "../shared/TimeWindow";
 
 export interface UpdateVehicle {
   external_id?: string;
@@ -12,7 +13,7 @@ export interface UpdateVehicle {
   default_start_location?: Location;
   default_end_location?: Location;
   default_provides?: string[];
-  default_time_window?: [number, number];
+  default_time_window?: TimeWindow;
   default_max_volume?: number;
   default_max_weight?: number;
   default_max_services?: number;

@@ -1,4 +1,4 @@
-import { TimeWindow } from "../../lib/common/interfaces/common";
+import { TimeWindows } from "../../lib/common/interfaces/shared/TimeWindow";
 
 export const clients = {
   client1: {
@@ -16,7 +16,7 @@ export const clients = {
     reference_person: `Manolo`,
     default_duration: 3600,
     default_requires: [`requires1`],
-    default_time_windows: [[0, 3600]] as TimeWindow[],
+    default_time_windows: [[0, 3600]] as TimeWindows,
     default_volume: 1000,
     default_weight: 1000,
   },

@@ -1,4 +1,5 @@
 import { Location } from "../shared/Location";
+import { TimeWindow } from "../shared/TimeWindow";
 import { CreateStop } from "../stop/CreateStop";
 import { DriverStatus } from "./DriverStatus";
 
@@ -13,7 +14,7 @@ export interface CreateDriver {
   color?: string;
   vehicle_model?: string;
   brand?: string;
-  time_window?: [number, number];
+  time_window?: TimeWindow;
   max_distance?: number;
   max_weight?: number;
   max_volume?: number;
@@ -23,7 +24,7 @@ export interface CreateDriver {
   provides?: string[];
   start_date?: Date;
   end_date?: Date;
-  status: DriverStatus;
+  status?: DriverStatus;
   real_track?: string;
   is_locked?: boolean;
   planned_track?: string;

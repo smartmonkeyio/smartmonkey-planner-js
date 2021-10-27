@@ -106,4 +106,10 @@ export class Stop {
     if (deleted) params.append(`deleted`, `${deleted}`);
     return this.planner.get(`stops/search?${params.toString()}`);
   };
+
+  moveToPlan = async({ stopId, planId }: { stopId: string; planId?: string; }): Promise<StopDTO> => {
+    const params = new URLSearchParams();
+    if (planId) params.append(`plan_id`, `${planId}`);
+    return this.planner.post(`stop/${stopId}/move?${params.toString()}`);
+  };
 }

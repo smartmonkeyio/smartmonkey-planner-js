@@ -1,5 +1,5 @@
 // TODO: This should be a valid object
-type LocalSearchMetaheuristic =
+export type LocalSearchMetaheuristic =
   | `AUTOMATIC`
   | `GREEDY_DESCENT`
   | `GUIDED_LOCAL_SEARCH`
@@ -7,7 +7,7 @@ type LocalSearchMetaheuristic =
   | `TABU_SEARCH`;
 
 // TODO: This should be a valid object
-type FirstSolutionStrategy =
+export type FirstSolutionStrategy =
   | `AUTOMATIC`
   | `PATH_CHEAPEST_ARC`
   | `PATH_MOST_CONSTRAINED_ARC`
@@ -23,7 +23,7 @@ type FirstSolutionStrategy =
   | `LOCAL_CHEAPEST_ARC`
   | `FIRST_UNBOUND_MIN_VALUE`;
 
-type ITransportModes = `car` | `truck` | `bicycle` | `pedestrian` | `scooter`;
+export type ITransportModes = `car` | `truck` | `bicycle` | `pedestrian` | `scooter`;
 
 export interface OptimizerConfig {
   max_wait_time?: number;

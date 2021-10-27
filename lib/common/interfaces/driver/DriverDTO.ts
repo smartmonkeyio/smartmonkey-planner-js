@@ -1,4 +1,5 @@
 import { Location } from "../shared/Location";
+import { TimeWindow } from "../shared/TimeWindow";
 import { StopDTO } from "../stop/StopDTO";
 import { DriverStatus } from "./DriverStatus";
 
@@ -16,7 +17,7 @@ export interface DriverDTO {
   color?: string;
   vehicle_model?: string;
   brand?: string;
-  time_window?: [number, number];
+  time_window?: TimeWindow;
   max_distance?: number;
   max_weight?: number;
   max_volume?: number;

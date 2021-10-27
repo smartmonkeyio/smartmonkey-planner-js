@@ -3,6 +3,7 @@ import { StopStatus } from "./StopStatus";
 import { TaskDTO } from "../task/TaskDTO";
 import { EventDTO } from "../event/EventDTO";
 import { ReportDTO } from "../report/ReportDTO";
+import { TimeWindows } from "../shared/TimeWindow";
 
 export interface StopDTO {
   id: string;
@@ -28,7 +29,7 @@ export interface StopDTO {
   // Constraints
   weight?: number;
   volume?: number;
-  time_windows?: Array<[number, number]>;
+  time_windows?: TimeWindows;
   requires?: string[];
   duration?: number;
 

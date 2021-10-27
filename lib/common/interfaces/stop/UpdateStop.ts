@@ -1,4 +1,5 @@
 import { Location } from "../shared/Location";
+import { TimeWindows } from "../shared/TimeWindow";
 
 export interface UpdateStop {
   client_id?: string;
@@ -19,7 +20,7 @@ export interface UpdateStop {
   // Constraints
   weight?: number;
   volume?: number;
-  time_windows?: Array<[number, number]>;
+  time_windows?: TimeWindows;
   requires?: string[];
   duration?: number;
 }
