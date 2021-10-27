@@ -16,7 +16,7 @@ interface ISearchStopsProps {
   offset?: number;
   limit?: number;
   text?: string;
-  plan_id?: string;
+  plan_id?: string | null;
   sort?: string;
   deleted?: boolean;
 }
@@ -102,12 +102,18 @@ export class Stop {
     params.append(`limit`, `${limit}`);
     if (text) params.append(`text`, `${text}`);
     if (sort) params.append(`sort`, `${sort}`);
-    if (plan_id) params.append(`plan_id`, `${plan_id}`);
+    if (plan_id !== undefined) params.append(`plan_id`, `${plan_id}`);
     if (deleted) params.append(`deleted`, `${deleted}`);
     return this.planner.get(`stops/search?${params.toString()}`);
   };
 
-  moveToPlan = async({ stopId, planId }: { stopId: string; planId?: string; }): Promise<StopDTO> => {
+  moveToPlan = async ({
+    stopId,
+    planId,
+  }: {
+    stopId: string;
+    planId?: string;
+  }): Promise<StopDTO> => {
     const params = new URLSearchParams();
     if (planId) params.append(`plan_id`, `${planId}`);
     return this.planner.post(`stop/${stopId}/move?${params.toString()}`);
