@@ -16,6 +16,7 @@ interface ISearchStopsProps {
   offset?: number;
   limit?: number;
   text?: string;
+  plan_id?: string;
   sort?: string;
   deleted?: boolean;
 }
@@ -91,6 +92,7 @@ export class Stop {
     offset = 0,
     limit = 20,
     text,
+    plan_id,
     sort,
     deleted = false,
   }: ISearchStopsProps): Promise<PaginatedResult<StopDTO>> => {
@@ -100,7 +102,7 @@ export class Stop {
     params.append(`limit`, `${limit}`);
     if (text) params.append(`text`, `${text}`);
     if (sort) params.append(`sort`, `${sort}`);
-    if (sort) params.append(`sort`, `${sort}`);
+    if (plan_id) params.append(`plan_id`, `${plan_id}`);
     if (deleted) params.append(`deleted`, `${deleted}`);
     return this.planner.get(`stops/search?${params.toString()}`);
   };
