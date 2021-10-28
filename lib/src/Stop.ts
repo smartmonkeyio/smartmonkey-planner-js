@@ -15,6 +15,7 @@ interface ISearchStopsProps {
   projectId: string;
   offset?: number;
   limit?: number;
+  geo_fences?: string[];
   text?: string;
   plan_id?: string | null;
   sort?: string;
@@ -92,6 +93,7 @@ export class Stop {
     offset = 0,
     limit = 20,
     text,
+    geo_fences,
     plan_id,
     sort,
     deleted = false,
@@ -104,6 +106,7 @@ export class Stop {
     if (sort) params.append(`sort`, `${sort}`);
     if (plan_id !== undefined) params.append(`plan_id`, `${plan_id}`);
     if (deleted) params.append(`deleted`, `${deleted}`);
+    if (geo_fences) params.append(`geo_fences`, `${geo_fences}`);
     return this.planner.get(`stops/search?${params.toString()}`);
   };
 
