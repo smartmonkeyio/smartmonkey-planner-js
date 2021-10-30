@@ -106,7 +106,8 @@ export class Stop {
     if (sort) params.append(`sort`, `${sort}`);
     if (plan_id !== undefined) params.append(`plan_id`, `${plan_id}`);
     if (deleted) params.append(`deleted`, `${deleted}`);
-    if (geo_fences) params.append(`geo_fences`, `${geo_fences}`);
+    if (geo_fences)
+      geo_fences.forEach((gf) => params.append(`geo_fences`, `${gf}`));
     return this.planner.get(`stops/search?${params.toString()}`);
   };
 
