@@ -18,6 +18,7 @@ export interface DriverDTO {
   vehicle_model?: string;
   brand?: string;
   time_window?: TimeWindow;
+  geo_fences?: string[];
   max_distance?: number;
   max_weight?: number;
   max_volume?: number;

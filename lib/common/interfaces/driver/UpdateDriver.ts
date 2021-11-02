@@ -13,6 +13,7 @@ export interface UpdateDriver {
   color?: string;
   vehicle_model?: string;
   brand?: string;
+  geo_fences?: string[];
   time_window?: TimeWindow;
   max_distance?: number;
   max_weight?: number;
