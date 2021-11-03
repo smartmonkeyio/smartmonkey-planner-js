@@ -87,6 +87,7 @@ export class Vehicle {
       custom_fields,
       price_per_minute,
       price_per_distance,
+      geo_fences,
     } = driver;
 
     const newVehicle: CreateVehicle = {
@@ -97,6 +98,7 @@ export class Vehicle {
       default_max_services: max_services,
       default_provides: provides,
       default_time_window: time_window,
+      default_geo_fences: geo_fences,
       plate,
       phone,
       label,

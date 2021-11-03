@@ -13,6 +13,7 @@ export interface UpdateVehicle {
   default_start_location?: Location;
   default_end_location?: Location;
   default_provides?: string[];
+  default_geo_fences?: string[];
   default_time_window?: TimeWindow;
   default_max_volume?: number;
   default_max_weight?: number;

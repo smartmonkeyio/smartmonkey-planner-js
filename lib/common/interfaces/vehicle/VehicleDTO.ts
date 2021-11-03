@@ -22,6 +22,7 @@ export interface VehicleDTO {
   default_start_location?: Location;
   default_end_location?: Location;
   default_provides?: string[];
+  default_geo_fences?: string[];
   custom_fields?: Record<string, any>;
   price_per_distance?: number;
   price_per_minute?: number;

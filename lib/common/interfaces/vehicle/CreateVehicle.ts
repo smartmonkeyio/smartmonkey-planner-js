@@ -17,6 +17,7 @@ export interface CreateVehicle {
   default_max_volume?: number;
   default_max_weight?: number;
   default_max_services?: number;
+  default_geo_fences?: string[];
   custom_fields?: any;
   price_per_distance?: number;
   price_per_minute?: number;
