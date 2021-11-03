@@ -18,8 +18,8 @@ describe(`Test Vehicles API`, () => {
     allProjectIds = allProjects.status === 200 ? allProjects.data.map((project: any) => project.id) : [];
 
     // Removing all previous vehicles
-    const vehicles = await planner.vehicle.listFlat(allProjectIds[0]);
-    vehicles.map(async (vehicle: any) => {
+    const vehicles = await planner.vehicle.search({ projectId: allProjectIds[0] });
+    vehicles.docs.map(async (vehicle: any) => {
       await planner.vehicle.delete(vehicle.id);
     });
   });
@@ -42,8 +42,8 @@ describe(`Test Vehicles API`, () => {
       assert.strictEqual(vehicle.external_id, loader.vehicles.vehicle1.external_id);
     });
     it(`Should be able to retrieve a flat list of vehicles`, async () => {
-      const clients = await planner.vehicle.listFlat(allProjectIds[0]);
-      assert.strictEqual(clients.length, 7);
+      const clients = await planner.vehicle.search({ projectId: allProjectIds[0] });
+      assert.strictEqual(clients.docs.length, 7);
     });
     it(`Should be able to update a vehicle`, async () => {
       const vehicle = await planner.vehicle.update(allVehicleIds[2], {

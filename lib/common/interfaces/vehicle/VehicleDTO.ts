@@ -34,9 +34,3 @@ export interface VehicleDTO {
   updated_at?: Date;
   deleted_at?: Date;
 }
-
-export interface VehicleFlatDTO {
-  id: string;
-  lat: number;
-  lng: number;
-}
