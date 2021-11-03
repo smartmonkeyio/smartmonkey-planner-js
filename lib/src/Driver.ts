@@ -46,6 +46,7 @@ export class Driver {
       default_provides,
       default_time_window,
       default_max_services,
+      default_geo_fences,
       plate,
       vehicle_model,
       color,
@@ -69,6 +70,7 @@ export class Driver {
       max_services: default_max_services,
 
       provides: default_provides,
+      geo_fences: default_geo_fences,
       time_window: default_time_window,
       plate,
       vehicle_model,
