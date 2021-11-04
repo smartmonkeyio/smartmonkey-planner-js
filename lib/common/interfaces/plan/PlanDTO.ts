@@ -12,6 +12,7 @@ export interface PlanDTO {
   label?: string;
   optimizer_config?: OptimizerConfig;
   completed_stops?: number;
+  incomplete_stops?: number;
   canceled_stops?: number;
   pending_stops?: number;
   total_stops?: number;
