@@ -2,6 +2,7 @@ import { DriverDTO } from "../driver/DriverDTO";
 import { GeoFenceDTO } from "../geoFence/GeoFenceDTO";
 import { StopDTO } from "../stop/StopDTO";
 import { OptimizerConfig } from "./OptimizerConfig";
+import { TrafficOptions } from "./TrafficOptions";
 import { PlanStatus } from "./PlanStatus";
 
 export interface PlanDTO {
@@ -11,6 +12,7 @@ export interface PlanDTO {
   status: PlanStatus;
   label?: string;
   optimizer_config?: OptimizerConfig;
+  traffic_options?: TrafficOptions;
   completed_stops?: number;
   incomplete_stops?: number;
   canceled_stops?: number;

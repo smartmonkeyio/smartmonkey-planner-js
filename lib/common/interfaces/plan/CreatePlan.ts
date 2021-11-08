@@ -2,6 +2,7 @@ import { CreateDriver } from "../driver/CreateDriver";
 import { CreateStop } from "../stop/CreateStop";
 import { OptimizerConfig } from "./OptimizerConfig";
 import { PlanStatus } from "./PlanStatus";
+import { TrafficOptions } from "./TrafficOptions";
 
 export interface CoordinateDTO {
   lat: number;
@@ -21,4 +22,5 @@ export interface CreatePlan {
   status?: PlanStatus;
   optimizer_config?: OptimizerConfig;
   label?: string;
+  traffic_options?: TrafficOptions;
 }

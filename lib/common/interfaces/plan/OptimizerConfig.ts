@@ -23,11 +23,8 @@ export type FirstSolutionStrategy =
   | `LOCAL_CHEAPEST_ARC`
   | `FIRST_UNBOUND_MIN_VALUE`;
 
-export type ITransportModes = `car` | `truck` | `bicycle` | `pedestrian` | `scooter`;
-
 export interface OptimizerConfig {
   max_wait_time?: number;
-  matrix_multiplier?: number;
   first_solution_strategy?: FirstSolutionStrategy;
   local_search_strategy?: LocalSearchMetaheuristic;
   time_limit_seconds?: number;
@@ -35,5 +32,4 @@ export interface OptimizerConfig {
   balance_services?: boolean;
   service_duration?: number;
   operation_country?: string;
-  transport_mode?: ITransportModes;
 }

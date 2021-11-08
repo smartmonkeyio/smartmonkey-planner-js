@@ -1,5 +1,6 @@
 import { OptimizerConfig } from "./OptimizerConfig";
 import { PlanStatus } from "./PlanStatus";
+import { TrafficOptions } from "./TrafficOptions";
 
 export interface UpdatePlan {
   user_id: string;
@@ -7,4 +8,5 @@ export interface UpdatePlan {
   optimizer_config?: OptimizerConfig;
   label?: string;
   status?: PlanStatus;
+  traffic_options?: TrafficOptions;
 }
