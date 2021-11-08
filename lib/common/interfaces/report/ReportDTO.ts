@@ -1,5 +1,7 @@
 import { Location } from "../shared/Location";
 
+export type ReportType = `service_report_completed` | `service_report_canceled`;
+
 export interface ReportTaskDTO {
   task_id: string;
   status: string;
@@ -17,7 +19,7 @@ export interface ReportDTO {
   driver_id: string;
   project_id: string;
   plan_id?: string;
-  type: string;
+  type: ReportType;
   comments?: string;
   images?: ImageDTO[];
   signature?: string;
