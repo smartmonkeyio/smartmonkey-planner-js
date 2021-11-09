@@ -32,5 +32,5 @@ export interface ITruckOptions {
 export interface TrafficOptions {
   mode?: ITransportModes;
   multiplier?: number;
-  truck_options?: ITruckOptions
+  truck?: ITruckOptions;
 }
