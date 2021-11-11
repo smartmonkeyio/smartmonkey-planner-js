@@ -1,6 +1,7 @@
 import { CreateDriver } from "../common/interfaces/driver/CreateDriver";
 import { DriverDTO } from "../common/interfaces/driver/DriverDTO";
 import { PaginatedResult } from "../common/interfaces/shared/PaginatedResult";
+import { StopDTO } from "../common/interfaces/stop/StopDTO";
 import { Planner } from "./Planner";
 
 interface ICreateDriversProps {
@@ -100,7 +101,9 @@ export class Driver {
     return this.planner.get(`driver/${driverId}`);
   };
 
-  optimize = async (driverId: string): Promise<DriverDTO> => {
+  optimize = async (
+    driverId: string
+  ): Promise<{ driver: DriverDTO; unassigned_stops: StopDTO[] }> => {
     return this.planner.post(`driver/${driverId}/optimize`);
   };
 
