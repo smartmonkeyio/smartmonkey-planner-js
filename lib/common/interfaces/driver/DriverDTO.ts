@@ -1,3 +1,4 @@
+import { CoordinateDTO } from "../plan/CreatePlan";
 import { Location } from "../shared/Location";
 import { TimeWindow } from "../shared/TimeWindow";
 import { StopDTO } from "../stop/StopDTO";
@@ -34,6 +35,7 @@ export interface DriverDTO {
   planned_track?: string;
   planned_start_time?: number;
   planned_end_time?: number;
+  last_position?: CoordinateDTO;
 
   price_per_distance?: number;
   price_per_minute?: number;
