@@ -19,12 +19,14 @@ export interface PlanDTO {
   pending_stops?: number;
   total_stops?: number;
   total_drivers?: number;
-  created_at: string;
-  updated_at?: string;
-  deleted_at?: string;
+  created_at: Date;
+  updated_at?: Date;
+  deleted_at?: Date;
   created_by: string;
-  deleted?: boolean; 
+  deleted?: boolean;
   stops: StopDTO[];
   drivers: DriverDTO[];
   geo_fences: GeoFenceDTO[];
+  start_date?: Date;
+  end_date?: Date;
 }
