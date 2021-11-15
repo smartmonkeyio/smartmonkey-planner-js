@@ -23,4 +23,5 @@ export interface CreatePlan {
   optimizer_config?: OptimizerConfig;
   label?: string;
   traffic_options?: TrafficOptions;
+  geo_fences?: string[];
 }
