@@ -40,6 +40,7 @@ export interface StopDTO {
   planned_departure_time?: number;
   distance_to_previous_stop?: number;
   distance_to_next_stop?: number;
+  estimated_arrival_time?: Date;
   estimated_departure_time?: Date;
 
   pickup_id?: string;
