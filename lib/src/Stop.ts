@@ -112,14 +112,15 @@ export class Stop {
   };
 
   moveToPlan = async ({
-    stopId,
+    stopsId,
     planId,
   }: {
-    stopId: string;
+    stopsId: string[];
     planId?: string;
   }): Promise<StopDTO> => {
     const params = new URLSearchParams();
     if (planId) params.append(`plan_id`, `${planId}`);
-    return this.planner.post(`stop/${stopId}/move?${params.toString()}`);
+    stopsId.map(stopId => params.append("stops_id", stopId));
+    return this.planner.post(`stop/move?${params.toString()}`);
   };
 }
