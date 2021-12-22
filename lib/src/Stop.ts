@@ -124,6 +124,6 @@ export class Stop {
   }): Promise<StopDTO> => {
     const params = new URLSearchParams();
     if (planId) params.append(`plan_id`, `${planId}`);
-    return this.planner.post(`stop/move`, { stop_ids: stopIds });
+    return this.planner.post(`stop/move?${params.toString()}`, { stop_ids: stopIds });
   };
 }
