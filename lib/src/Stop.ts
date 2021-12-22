@@ -84,6 +84,10 @@ export class Stop {
     return this.planner.delete(`stop/${stopId}`);
   };
 
+  deleteMany = async (stopIds: string[]): Promise<StopDTO[]> => {
+    return this.planner.put(`stops/delete`, { stop_ids: stopIds });
+  };
+
   get = async (stopID: string): Promise<StopDTO> => {
     return this.planner.get(`stop/${stopID}`);
   };
