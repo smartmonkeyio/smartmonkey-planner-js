@@ -6,7 +6,6 @@ import { Plan } from "./Plan";
 import { Driver } from "./Driver";
 import { Stop } from "./Stop";
 import { Vehicle } from "./Vehicle";
-import { Webhook } from "./Webhook";
 
 export interface IPlannerOptions {
   bearer?: string;
@@ -23,7 +22,6 @@ export class Planner {
   private queryParams: { [param: string]: string } | undefined;
 
   client: Client;
-  webhook: Webhook;
   plan: Plan;
   driver: Driver;
   stop: Stop;
@@ -33,7 +31,6 @@ export class Planner {
     this._token = options.bearer;
     this._apiKey = apiKey;
     this.client = new Client(this);
-    this.webhook = new Webhook(this);
     this.plan = new Plan(this);
     this.driver = new Driver(this);
     this.stop = new Stop(this);
