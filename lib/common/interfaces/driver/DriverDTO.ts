@@ -35,6 +35,8 @@ export interface DriverDTO {
   planned_track?: string;
   planned_start_time?: number;
   planned_end_time?: number;
+  total_distance?: number;
+  distance_traveled?: number;
   last_position?: CoordinateDTO;
 
   price_per_distance?: number;
