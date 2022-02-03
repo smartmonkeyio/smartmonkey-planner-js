@@ -1,10 +1,11 @@
 import { Location } from "../shared/Location";
+import { TaskStatus } from "../task/TaskStatus";
 
 export type ReportType = `service_report_completed` | `service_report_canceled`;
 
 export interface ReportTaskDTO {
   task_id: string;
-  status: string;
+  status: TaskStatus;
   custom_fields: Record<string, any>;
 }
 
