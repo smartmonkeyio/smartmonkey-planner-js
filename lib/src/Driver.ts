@@ -1,5 +1,6 @@
 import { CreateDriver } from "../common/interfaces/driver/CreateDriver";
 import { DriverDTO } from "../common/interfaces/driver/DriverDTO";
+import { UpdateDriver } from "../common/interfaces/driver/UpdateDriver";
 import { PaginatedResult } from "../common/interfaces/shared/PaginatedResult";
 import { StopDTO } from "../common/interfaces/stop/StopDTO";
 import { Planner } from "./Planner";
@@ -88,7 +89,7 @@ export class Driver {
 
   update = async (
     driverId: string,
-    driver: CreateDriver
+    driver: UpdateDriver
   ): Promise<DriverDTO> => {
     return this.planner.put(`driver/${driverId}`, driver);
   };
