@@ -59,6 +59,7 @@ export class Driver {
       custom_fields,
       price_per_distance,
       price_per_minute,
+      external_id,
     } = vehicle;
 
     return {
@@ -70,10 +71,11 @@ export class Driver {
       max_volume: default_max_volume,
       max_weight: default_max_weight,
       max_services: default_max_services,
-
+      
       provides: default_provides,
       geo_fences: default_geo_fences,
       time_window: default_time_window,
+      external_id,
       plate,
       vehicle_model,
       color,
