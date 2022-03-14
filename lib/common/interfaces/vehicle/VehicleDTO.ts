@@ -5,6 +5,7 @@ export interface VehicleDTO {
   id: string;
   organization_id: string;
   project_id: string;
+  avatar_url?: string;
   external_id?: string;
   label?: string;
   phone?: string;
