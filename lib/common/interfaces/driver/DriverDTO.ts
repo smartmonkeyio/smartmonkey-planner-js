@@ -4,6 +4,11 @@ import { TimeWindow } from "../shared/TimeWindow";
 import { StopDTO } from "../stop/StopDTO";
 import { DriverStatus } from "./DriverStatus";
 
+export interface GPSTrackDTO extends CoordinateDTO {
+  orientation: number;
+  created_at: Date;
+}
+
 export interface DriverDTO {
   id: string;
   plan_id: string;
@@ -37,7 +42,7 @@ export interface DriverDTO {
   planned_end_time?: number;
   total_distance?: number;
   distance_traveled?: number;
-  last_position?: CoordinateDTO;
+  last_position?: GPSTrackDTO;
 
   price_per_distance?: number;
   price_per_minute?: number;
