@@ -63,17 +63,10 @@ export class Plan {
     return this.planner.get(`plans?${params.toString()}`);
   };
 
-  optimize = async (planId: string): Promise<PlanDTO> => {
-    return this.planner.post(`plan/${planId}/optimize`);
-  };
-
-  optimizeAsync = async (
-    planId: string
-  ): Promise<{
-    finished: boolean;
-    status: `in progress` | `success` | `failed`;
-  }> => {
-    return this.planner.post(`plan/${planId}/optimize/async`);
+  optimize = async ({ planId, keepCurrentAssignment = false } : { planId: string; keepCurrentAssignment?: boolean; }): Promise<PlanDTO> => {
+    const params = new URLSearchParams();
+    params.append(`keep_current_assignment`, `${keepCurrentAssignment}`);
+    return this.planner.post(`plan/${planId}/optimize?${params.toString()}`);
   };
 
   addStops = async (planId: string, stops: CreateStop[]): Promise<PlanDTO> => {
