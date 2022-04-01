@@ -2,6 +2,7 @@ import { CoordinateDTO } from "../plan/CreatePlan";
 import { Location } from "../shared/Location";
 import { TimeWindow } from "../shared/TimeWindow";
 import { StopDTO } from "../stop/StopDTO";
+import { SurveyDTO } from "../survey/SurveyDTO";
 import { DriverStatus } from "./DriverStatus";
 
 export interface GPSTrackDTO extends CoordinateDTO {
@@ -51,6 +52,8 @@ export interface DriverDTO {
   custom_fields?: Record<string, any>;
 
   stops: StopDTO[];
+
+  survey?: SurveyDTO;
 
   // CRUD
   deleted?: boolean;
