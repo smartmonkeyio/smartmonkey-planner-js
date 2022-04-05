@@ -4,7 +4,7 @@ import { TaskDTO } from "../task/TaskDTO";
 import { EventDTO } from "../event/EventDTO";
 import { ReportDTO } from "../report/ReportDTO";
 import { TimeWindows } from "../shared/TimeWindow";
-import { SurveyDTO } from "../survey/SurveyDTO";
+import { CustomersSurveyDTO } from "../survey/CustomersSurveyDTO";
 
 export interface StopDTO {
   id: string;
@@ -49,7 +49,7 @@ export interface StopDTO {
   tasks?: TaskDTO[];
   events?: EventDTO[];
   reports?: ReportDTO[];
-  survey?: SurveyDTO;
+  survey?: CustomersSurveyDTO;
 
   // CRUD
   deleted?: boolean;
