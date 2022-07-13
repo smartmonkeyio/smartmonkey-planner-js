@@ -33,6 +33,7 @@ export interface StopDTO {
   time_windows?: TimeWindows;
   requires?: string[];
   duration?: number;
+  max_delivery_time?: number;
 
   // Operational
   driver_id?: string;

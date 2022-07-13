@@ -27,6 +27,9 @@ export interface DriverDTO {
   time_window?: TimeWindow;
   geo_fences?: string[];
   max_distance?: number;
+	min_distance?: number;
+	max_time?: number;
+	min_time?: number;
   max_weight?: number;
   max_volume?: number;
   max_services?: number;

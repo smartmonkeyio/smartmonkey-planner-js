@@ -32,4 +32,8 @@ export interface OptimizerConfig {
   balance_services?: boolean;
   service_duration?: number;
   operation_country?: string;
+  time_span_coefficient?: number;
+	distance_span_coefficient?: number;
+	use_distance?: boolean;
+	drop_penalty?: number;
 }

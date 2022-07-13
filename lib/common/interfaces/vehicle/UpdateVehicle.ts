@@ -18,6 +18,10 @@ export interface UpdateVehicle {
   default_max_volume?: number;
   default_max_weight?: number;
   default_max_services?: number;
+  default_max_distance?: number;
+	default_min_distance?: number;
+	default_max_time?: number;
+	default_min_time?: number;
   custom_fields?: any;
   price_per_distance?: number;
   price_per_minute?: number;

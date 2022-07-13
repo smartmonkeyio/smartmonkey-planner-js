@@ -17,4 +17,5 @@ export interface CreateClient {
   default_volume?: number;
   default_weight?: number;
   custom_fields?: Record<string, any>;
+  default_max_delivery_time?: number;
 }

@@ -78,6 +78,11 @@ export class Client {
       location_details,
       client_external_id,
       reference_person,
+      requires,
+      volume,
+      weight,
+      time_windows,
+      max_delivery_time,
     } = stop;
     const newClient: CreateClient = {
       label,
@@ -88,10 +93,11 @@ export class Client {
       email,
       reference_person,
       external_id: client_external_id,
-      default_requires: stop.requires,
-      default_volume: stop.volume,
-      default_weight: stop.weight,
-      default_time_windows: stop.time_windows,
+      default_requires: requires,
+      default_volume: volume,
+      default_weight: weight,
+      default_time_windows: time_windows,
+      default_max_delivery_time: max_delivery_time
     };
     return Object.entries(newClient).reduce(
       (a, [k, v]) => (v === undefined ? a : { ...a, [k]: v }),

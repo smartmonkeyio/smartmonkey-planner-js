@@ -27,6 +27,7 @@ export interface CreateStop {
   time_windows?: TimeWindows;
   requires?: string[];
   duration?: number;
+  max_delivery_time?: number;
 
   // Operational
   tasks?: CreateTask[];

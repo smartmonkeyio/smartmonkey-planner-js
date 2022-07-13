@@ -69,6 +69,10 @@ export class Vehicle {
     const {
       end_location,
       start_location,
+      max_distance,
+      min_distance,
+      max_time,
+      min_time,
       max_volume,
       max_weight,
       max_services,
@@ -87,6 +91,10 @@ export class Vehicle {
     const newVehicle: CreateVehicle = {
       default_start_location: start_location,
       default_end_location: end_location,
+      default_max_distance: max_distance,
+      default_min_distance: min_distance,
+      default_max_time: max_time,
+      default_min_time: min_time,
       default_max_volume: max_volume,
       default_max_weight: max_weight,
       default_max_services: max_services,
